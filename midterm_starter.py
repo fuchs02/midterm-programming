@@ -1,5 +1,6 @@
 import time
 import random
+import matplotlib.pyplot as plt
 
 # =======================================================
 # DO NOT MODIFY THE ALGORITHM IMPLEMENTATIONS
@@ -49,6 +50,56 @@ def flawed_benchmark():
     end_time_2 = time.time()
     print(f"Fast algorithm took: {end_time_2 - start_time_2} seconds")
 
+def new_benchmark():
+
+    print("running new benchmark...")
+
+    times_slow = []
+    times_fast = []
+
+    n = [10,100,1000,10000]
+
+    for value in n:
+        data = list(range(value))
+
+        start_time = time.perf_counter()
+        find_duplicates_slow(data)
+        end_time = time.perf_counter()
+        times_slow.append(end_time - start_time)
+
+        start_time_2 = time.perf_counter()
+        find_duplicates_fast(data)
+        end_time_2 = time.perf_counter()
+        times_fast.append(end_time_2 - start_time_2)
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(n, times_slow, marker="o", label="Baseline algorithm")
+    plt.plot(n, times_fast, marker="o", label="Algorithmic strategy")
+    plt.xlabel("Input size")
+    plt.ylabel("Time (seconds)")
+    plt.title("Algorithm Runtime Comparison")
+    plt.legend()
+    plt.grid(True)
+    plt.savefig("Algorithm_Runtime_Comparison.png")
+    plt.show()
+    plt.close()
+    
+
+    plt.figure(figsize=(10, 6))
+    plt.yscale('log')
+    plt.plot(n, times_slow, marker="o", label="Baseline algorithm")
+    plt.plot(n, times_fast, marker="o", label="Algorithmic strategy")
+    plt.xlabel("Input size")
+    plt.ylabel("Time (seconds)")
+    plt.title("Algorithm Runtime Comparison (Log scale)")
+    plt.legend()
+    plt.grid(True)
+    plt.savefig("Algorithm_Runtime_Comparison_(log_scale).png")
+    plt.show()
+    plt.close()
+    
+    
 
 if __name__ == "__main__":
     flawed_benchmark()
+    new_benchmark()
