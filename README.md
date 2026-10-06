@@ -14,7 +14,12 @@ The file also contains a `flawed_benchmark()` function. The developer who wrote 
 
 1. Rewrite the `flawed_benchmark()` function to provide a robust empirical comparison of the two algorithms. List the methodological errors in the original benchmark and explain how you fixed them. Your benchmark should demonstrate the scaling behavior of the two algorithms across multiple input sizes.
 
-*list your methodological errors and fixes here*
+# the errors I found in the benchmark where:
+# Wrong time function, perf_counter is better at measuring small differences
+# Only one test, this doesn't account for backround errors or allow for graphing
+# Different data for each measurement, the code stops when it find two that match this makes it so different data will return at different times
+# Matching, by measureing worst case and having no matches you can more accuralty test the two functions
+# Data creation, by creating the data within the time function you add time that the functions didn't take
 
 2. Run the empirical comparion and plot the results using a plotting library of your choice (e.g., `matplotlib`, `seaborn`, etc.). Include the plot in your submission called `results.png`. Be sure to label your axes and include a legend.
 

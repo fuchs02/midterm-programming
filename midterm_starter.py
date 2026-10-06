@@ -50,6 +50,7 @@ def flawed_benchmark():
     end_time_2 = time.time()
     print(f"Fast algorithm took: {end_time_2 - start_time_2} seconds")
 
+
 def new_benchmark():
 
     print("running new benchmark...")
